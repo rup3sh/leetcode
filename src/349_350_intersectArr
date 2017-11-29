@@ -1,0 +1,77 @@
+#!/bin/python3
+
+#349. Intersection of Two Arrays. Each element in the result must be unique.
+
+class Solution(object):
+	def intersect(self, nums1, nums2):
+		"""
+		:type nums1: List[int]
+		:type nums2: List[int]
+		:rtype: List[int]
+		"""
+		
+		if not nums1 or not nums2:
+			return []
+			
+		nums1.sort()
+		nums2.sort()
+	
+		p1 = p2 = 0
+		
+		result = []
+		
+		while p1<len(nums1) and p2<len(nums2):
+			if nums1[p1] == nums2[p2]:
+				
+				if not result or result[-1]!=nums1[p1]:
+					result.append(nums1[p1])
+				p1,p2 = p1+1, p2+1
+			elif nums1[p1]<nums2[p2]:
+				p1+=1
+			else:
+				p2+=1
+				
+		return result
+		
+#350. Intersection of Two Arrays II 
+'''class Solution(object):
+	def intersect(self, nums1, nums2):
+		"""
+		:type nums1: List[int]
+		:type nums2: List[int]
+		:rtype: List[int]
+		"""
+		
+		if not nums1 or not nums2:
+			return []
+			
+		nums1.sort()
+		nums2.sort()
+	
+		p1 = p2 = 0
+		
+		result = []
+		
+		while p1<len(nums1) and p2<len(nums2):
+			if nums1[p1] == nums2[p2]:
+				result.append(nums1[p1])
+				p1,p2 = p1+1, p2+1
+			elif nums1[p1]<nums2[p2]:
+				p1+=1
+			else:
+				p2+=1
+				
+		return result							
+'''
+					
+def main():
+
+	sol = Solution()
+	l = [1, 2, 2, 1]
+	r = [2,2]
+		
+
+	val = sol.intersect(l,r)
+	print("Result", val)
+	
+if __name__=="__main__":main()

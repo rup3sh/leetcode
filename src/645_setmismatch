@@ -1,0 +1,42 @@
+#!/bin/python3
+
+# 645 Set mismatch
+# The set S originally contains numbers from 1 to n. 
+# But unfortunately, due to the data error, one of the numbers in the set
+# got duplicated to another number in the set, which results in repetition of one number and loss of another number. 
+import collections
+
+class Solution(object):
+
+	def findErrorNums(self, nums):
+		
+		count = collections.Counter()
+		
+		for n in nums:
+			count[n] +=1
+			
+		twice = None
+		noshow = None
+		print(count)
+			
+		for i in range(1, len(nums)+1):
+		
+			if i not in count:
+				noshow = i
+				continue
+				
+			if count[i]>1:
+				twice = i
+						
+		return [twice, noshow]
+					
+def main():
+
+	sol = Solution()
+	
+	num2 = [1,1]
+	print("Number:", num2)
+	val = sol.findErrorNums(num2)
+	print("Result", val)
+	
+if __name__=="__main__":main()

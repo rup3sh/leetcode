@@ -1,0 +1,39 @@
+#!/bin/python3
+
+# Given an array of integers, every element appears twice except for one. 
+# Find that single one.
+
+class SolutionWithSet(object):
+	def singleNumber(self, nums):
+		"""
+		:type nums: List[int]
+		:rtype: int
+		"""
+		return (sum(nums)-sum(set(nums)))		
+		
+
+class Solution(object):
+	def singleNumber(self, nums):
+		"""
+		:type nums: List[int]
+		:rtype: int
+		"""
+		result = 0
+
+		for n in nums:
+			result ^=n
+			
+		return 	result	
+
+def main():
+
+	print ("unique number")
+	sol = Solution()
+	
+	a = [2,2, 3,4,4,9,9, 7, 7,8,8]
+
+	result = sol.singleNumber(a)
+
+	print(result)
+
+if __name__=="__main__":main()

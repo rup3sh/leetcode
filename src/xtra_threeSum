@@ -1,0 +1,98 @@
+#!/bin/python3
+
+# Given an array of sorted integers, return indices of the two numbers 
+# such that they add up to a specific target.
+#Time is O(N), space is O(1)
+class Solution:
+	def threeSumHashExtraSpace(self, nums, target):
+		"""
+        	:type nums: List[int]
+        	:type target: int
+        	:rtype: List[int]
+		"""
+		## Cannot do this becasue target can be zero
+		if not nums:
+			raise ValueError("Inputs not correct")
+			
+		num_set = {i for i in nums}
+		found = False
+		print(num_set)
+		foundset = set()
+		
+		for n1 in num_set:
+			for n2 in num_set:
+				n3 = target - (n2+n1)
+				if n3 in num_set:
+					#If you want to find all
+					snum = sorted([n1,n2,n3])
+					foundset.add(tuple(snum))
+					#found= True
+					#break
+			#if found:
+				#break
+					
+		if not found:
+			print("Not found")
+		
+		print(foundset)
+	
+	# epip 17.4
+	
+	def threeSumEPIP(self, nums, target):
+	
+		"""
+        	:type nums: List[int]
+        	:type target: int
+        	:rtype: List[int]
+		"""
+		for i in nums:
+			r = self.twoSum(nums, target - i)
+			if r :
+				return [i, r[0], r[1]]
+				
+	def threeSum(self, nums, target):
+	
+		"""
+        	:type nums: List[int]
+        	:type target: int
+        	:rtype: List[int]
+		"""
+		result = []
+		for i in nums:
+			r = self.twoSum(nums, target - i)
+			if r :
+				result.append([i, r[0], r[1]])				
+		return result
+					
+	def twoSum(self, nums, target):
+	
+		start = 0
+		end = len(nums) - 1
+		
+		while start<end:
+			#print(start, end)
+			if target == nums[start] + nums[end]:
+				return [nums[start], nums[end]]
+			elif target<nums[start] + nums[end]:
+				end-=1
+			else:
+				start+=1
+		return []		
+	
+def main():
+
+	print ("3 sum")
+	sol = Solution()
+	nums = [2, 7, 11, 5, 3]
+	target = 21
+	#target = 9
+	nums = [-1, 0, 1, 2, -1, -4]
+	target = 0
+	
+	nums.sort()
+	#print(nums)
+	result = sol.threeSum(nums, target)
+	#result = sol.twoSum(nums, target)
+	print(result)
+	
+if __name__=="__main__":main()

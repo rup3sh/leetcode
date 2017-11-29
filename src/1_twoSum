@@ -1,0 +1,49 @@
+#!/bin/python3
+
+# Given an array of integers, return indices of the two numbers 
+# such that they add up to a specific target.
+
+#Brute-Force
+class SolutionB:
+	def twoSum(self, nums, target):
+		"""
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+		"""
+		for i in range(0, len(nums)):
+			x_target = target - nums[i] 
+
+			for j in range(0, len(nums)):				
+				if i!=j and nums[j] == x_target:
+					return [i,j]
+						
+#One-pass hash table
+
+class Solution:
+	def twoSum(self, nums, target):
+		"""
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+		"""
+		complements = dict()
+		for i in range(0, len(nums)):
+			x_target = target - nums[i]
+			if x_target in complements:
+				return [complements[x_target][1],i] ##Return previous and current
+
+			if nums[i] not in complements:
+				complements[nums[i]] = (nums[i], i)
+	
+def main():
+
+	print ("2 sum")
+	sol = Solution()
+	nums = [2, 7, 11, 15]
+	target = 9
+	result = sol.twoSum(nums, target)
+
+	print(result)
+
+if __name__=="__main__":main()

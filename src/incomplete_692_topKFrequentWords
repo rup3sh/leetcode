@@ -1,0 +1,80 @@
+#!/bin/python3
+
+#Given a non-empty list of words, return the k most frequent elements.
+#Your answer should be sorted by frequency from highest to lowest. 
+# If two words have the same frequency, then the word with the lower alphabetical order comes first.
+# Partially implemented
+
+import heapq
+
+class Solution(object):
+
+	def topKFrequent(self, words, k):
+		"""
+ 		:type k: int
+		:rtype: List[str]
+		"""
+		
+		if len(words) <= k:
+			return words.sort()
+		
+		word_count = dict()
+		for i in range(0,k):
+			if words[i] in word_count:
+				word_count[words[i]] +=1
+			else:
+				word_count[words[i]] = 1
+		
+		#print(word_count)
+		
+		for i in range(k, len(words)):
+			
+			
+			if words[i] in word_count:
+				word_count[words[i]] +=1
+			else:
+				word_count[words[i]] = 1
+				
+		heap = [] #Min heap
+		#Heapify it
+		first_k_words = 0			
+		for key in word_count:
+			#print(key, word_count[key])
+			if first_k_words<k:
+				heapq.heappush(heap, (word_count[key], key))
+				first_k_words+=1
+			else:
+				count, w = heapq.heappop(heap)
+			
+				if count < word_count[words[i]]:
+					heapq.heappush(heap, (word_count[key], key))
+				else:
+					heapq.heappush(heap, (count, w))		
+		
+			#print(heap)
+				
+		#print(word_count)
+		
+		results = []
+			
+		while heap:
+			count, w = heapq.heappop(heap)
+			results.append((count,w))
+		
+		return results[::-1] #Send reverse results
+				
+					
+def main():
+	sol = Solution()
+	
+	k = 2 
+	words = ["i", "love", "leetcode", "i", "love", "coding"]
+	#words = ["i", "love", "leetcode", "i", "love", "coding", "leetcode"]
+	
+	#words = ["the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"]
+	#k = 4
+	
+	result = sol.topKFrequent(words, k)
+	print(result)
+	
+if __name__=="__main__":main()

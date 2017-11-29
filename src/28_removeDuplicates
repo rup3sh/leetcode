@@ -1,0 +1,47 @@
+#!/bin/python3
+
+class SolutionBrute(object):
+
+	def removeDuplicates(self, nums):
+		"""
+		:type nums: List[int]
+		:rtype: int
+		"""
+		for i in reversed(range (1, len(nums))):
+			if nums[i] == nums[i-1]:
+				del nums[i]
+
+		#print(nums)
+		return len(nums)
+	
+class Solution(object):
+
+	def removeDuplicates(self, nums):
+		"""
+		:type nums: List[int]
+		:rtype: int
+		"""
+		count = 0
+		for i in reversed(range (1, len(nums))):
+			if nums[i] == nums[i-1]:
+				for j in range(i,len(nums)-1):
+					nums[j] = nums[j+1]
+				nums[len(nums)-1] = 0
+				count+=1
+		
+
+		#print(nums)
+		return len(nums) - count #Returns total deletions
+
+def main():
+
+	print ("remove duplicates")
+	sol = Solution()
+	
+	a = [1,1,2,3,3]
+
+	result = sol.removeDuplicates(a)
+
+	print(result)
+
+if __name__=="__main__":main()

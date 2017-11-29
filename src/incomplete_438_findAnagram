@@ -1,0 +1,78 @@
+#!/bin/python3
+
+# This solution is timing out
+class Solution(object):
+	
+	def findAnagrams1(self, s, p):
+		"""
+		:type s: str
+		:type p: str
+		:rtype: List[int]
+		"""
+		if s==p:
+			return [0]
+					
+		t = ''.join(sorted(p))
+			
+		window_size=len(t)
+		results = []
+		for i in range(0, len(s)-window_size+1):
+			#print(s[i:(i+window_size)])
+			if ''.join(sorted(s[i:(i+window_size)])) == t:
+				results.append(i)			
+		return results			
+	
+	## With char counter				
+	def findAnagrams(self, s, p):
+		"""
+		:type s: str
+		:type p: str
+		:rtype: List[int]
+		"""
+		if s==p:
+			return [0]
+					
+		p_dict = dict()
+		results = []
+		
+		for c in p:
+			if c in p_dict:
+				p_dict[c]+=1
+			else:
+				p_dict[c]=1
+				
+		window_size=len(p)
+		for i in range(0, len(s)-window_size+1):
+			s_dict = dict()
+			#print(s[i:(i+window_size)])
+			for c in s[i:(i+window_size)]:
+				if c in s_dict:
+					s_dict[c]+=1
+				else:
+					s_dict[c] = 1
+			is_match = False
+			for char in p_dict:				
+				if char in s_dict and p_dict[char] == s_dict[char]:
+					is_match = True
+				else:
+					is_match=False
+					break
+			if is_match:
+				results.append(i)		
+							 						 
+						
+		return results	
+					
+def main():
+	sol = Solution()
+	#[0,1,2]
+	#s = 'abab'
+	#p = 'ba'
+	#[0,6]
+	s = "cbaebabacd"
+	p = "abc"
+	
+	result = sol.findAnagrams(s, p)
+	print(result)
+	
+if __name__=="__main__":main()

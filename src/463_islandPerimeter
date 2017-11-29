@@ -1,0 +1,80 @@
+#!/bin/python3
+
+#463. Island Perimeter 
+
+
+class Solution(object):
+	def islandPerimeter(self, grid):
+		"""
+		:type grid: List[List[int]]
+		:rtype: int
+		"""
+		numrows = len(grid)
+		numcolumns = len(grid[0])
+		#print("Numrows:", numrows, "Numcolumns:", numcolumns)
+		
+		def getPerimeter(r,c):
+			perimeter = 0
+			left  = c-1
+			right = c+1
+			top   = r-1
+			bottom=r+1
+			print(left, right, top, bottom)	
+			if left < 0: 
+				#print("left is border")
+				perimeter+=1
+			if top < 0 : 
+				#print("top is border")
+				perimeter+=1
+			if bottom > numrows-1:
+				#print("bottom is border")
+				perimeter+=1
+			if right > numcolumns-1:
+				#print("right is border")
+				perimeter+=1
+				
+			if left >= 0 and not grid[r][left]: 
+				#print("Adding left.")
+				perimeter+=1
+				
+			if right < numcolumns and not grid[r][right]: 
+				#print("Adding right")
+				perimeter+=1
+			
+			if bottom < numrows and not grid[bottom][c]: 
+				#print("Adding bottom")
+				perimeter+=1
+			
+			if top >=0 and not grid[top][c]: 
+				#print("Adding top")
+				perimeter+=1
+			
+			return perimeter
+		
+		
+		p = 0
+		for r, row in enumerate(grid):
+			for c, col in enumerate(row):
+				if not grid[r][c]: continue
+				#print("Row:", r, "Col:", c)
+				x = getPerimeter(r,c)
+				#print("Perimeter:", x)
+				p += x
+					
+					 		
+		return p			
+					
+def main():
+
+	sol = Solution()
+	grid = [[0,1,0,0], 
+		[1,1,1,0], 
+		[0,1,0,0],
+		[1,1,0,0]]
+		
+	grid = [[1],[0]]	
+
+	val = sol.islandPerimeter(grid)
+	print("Result", val)
+	
+if __name__=="__main__":main()

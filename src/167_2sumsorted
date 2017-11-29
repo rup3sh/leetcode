@@ -1,0 +1,43 @@
+#!/bin/python3
+
+# Given an array of sorted integers, return indices of the two numbers 
+# such that they add up to a specific target.
+#Time is O(N), space is O(1)
+class Solution:
+	def twoSum(self, nums, target):
+		"""
+        	:type nums: List[int]
+        	:type target: int
+        	:rtype: List[int]
+		"""
+		## Cannot do this becasue target can be zero
+		if not nums:
+			raise ValueError("Inputs not correct")
+			
+		start = 0
+		end   = len(nums) - 1
+		
+		while start<end:
+			#print(start, end)
+			if target < nums[start]+nums[end]:
+				end-=1
+			elif target > nums[start]+nums[end]:
+				start+=1
+			else:
+				#print("index1={}, index2={}".format(start+1, end+1))
+				return [start+1, end+1]	
+				break
+		#print("index1={-1}, index2={-1}")
+	
+def main():
+
+	print ("2 sum sorted")
+	sol = Solution()
+	nums = [2, 7, 11, 15]
+	target = 9
+	nums = [0,0,3,4]
+	target = 0
+	result = sol.twoSum(nums, target)
+	print(result)
+	
+if __name__=="__main__":main()

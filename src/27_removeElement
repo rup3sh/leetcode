@@ -1,0 +1,32 @@
+#!/bin/python3
+
+# Given an array and a value, remove all instances of that value in place 
+# and return the new length.
+
+class Solution:
+	def removeElement(self, nums, val):
+		"""
+		:type nums: List[int]
+		:type val: int
+		:rtype: int
+		"""
+	
+		for i in reversed(range (0, len(nums))):
+			if nums[i]==val:
+				del nums[i]
+
+		return len(nums)  
+			
+	
+def main():
+
+	print ("remove from back of list")
+	sol = Solution()
+	
+	nums = [3,2,2,3]
+	val = 3
+	result = sol.removeElement(nums, val)
+
+	print(result)
+
+if __name__=="__main__":main()

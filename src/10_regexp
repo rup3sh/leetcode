@@ -1,0 +1,40 @@
+#!/bin/python3
+
+## 10. Regular Expression Matching 
+## This also has a DP solution at leetcode
+class Solution:
+
+	def isMatch(self, text, pattern):
+		
+		print("==", text, pattern)
+		
+		if not pattern: ## Both are empty, returns True 
+			return not text
+		
+		first_match = text and (pattern[0] == text[0] or pattern[0] == '.')
+		
+		if len(pattern)>1 and pattern[1] == '*':
+			return (self.isMatch(text, pattern[2:]) or
+				 (first_match and self.isMatch(text[1:], pattern)))
+		else: # Dot pattern
+			 
+			text_suffix    = text[1:]
+			pattern_suffix = pattern[1:]		
+			return first_match and self.isMatch(text_suffix, pattern_suffix)
+		
+    		
+def main():
+
+	sol = Solution()
+	
+	#txt = 'abc'
+	#pat = '..c'
+	
+	txt = 'abbbc'
+	pat = 'ab*c'
+	
+	#print ("Text:", txt, "matches:", pat)
+	is_match = sol.isMatch(txt, pat)
+	print(is_match)	
+	
+if __name__=="__main__":main()

@@ -1,0 +1,46 @@
+#!/bin/python3
+
+import collections
+#Leetcode 110. Same Binary Tree 
+class Solution(object):
+
+	def isSameTree(self, p, q):
+		"""
+		:type p: TreeNode
+		:type q: TreeNode
+		:rtype: bool
+		"""
+		if not p and not q:
+			return True
+			
+		elif p and q:
+		
+			return (p.val == q.val and self.isSameTree(p.left,q.left) and self.isSameTree(p.right,q.right))
+		else:
+			
+        		return False
+		
+class TreeNode:
+
+	def __init__(self, val, left=None, right=None):
+		self.val = val
+		self.left = left
+		self.right = right					
+def main():
+
+	
+	l7 = TreeNode(7, TreeNode(10), TreeNode(11))
+	l15 = TreeNode(15, TreeNode(2), TreeNode(20))	
+	#l7 = TreeNode(7)
+	#l15 = TreeNode(15)	
+	l9 = TreeNode(9)
+	l20 = TreeNode(20, l15,l7)	
+	l3 = TreeNode(3, l9,l20)
+	
+	
+	#l3 = TreeNode(2, TreeNode(1))
+	sol = Solution()
+	depth = sol.minDepth(l3)
+	print("minDepth", depth)
+	
+if __name__=="__main__":main()

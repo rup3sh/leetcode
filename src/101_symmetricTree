@@ -1,0 +1,47 @@
+#!/bin/python3
+
+#101. Symmetric Tree
+
+class TreeNode:
+
+	def __init__(self, val, left=None, right=None):
+		self.val = val
+		self.left = left
+		self.right = right
+		
+class Solution:
+
+	def isSymmetric(self, root):
+		
+		def _isSym(l,r):
+			
+			if not l and not r:
+				return True
+				
+			if l and r and l.val==r.val and _isSym(l.left, r.right) and _isSym(l.right, r.left):
+				return True
+			
+			print(l.val, r.val)	
+			return False		
+							
+			
+		if not root:
+			return True
+			
+		return _isSym(root.left, root.right)
+		
+    		
+def main():
+
+	sol = Solution()
+	
+	tree = TreeNode(1, 
+			TreeNode(2, TreeNode(3), TreeNode(4)), 
+			TreeNode(2, TreeNode(4), TreeNode(3))
+			)
+	
+	
+	is_symmetric = sol.isSymmetric(tree)
+	print(is_symmetric)	
+	
+if __name__=="__main__":main()

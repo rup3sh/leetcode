@@ -1,0 +1,44 @@
+#!/bin/python3
+
+#125. Valid Palindrome
+
+class Solution:
+	
+	def isPalindrome(self, s):
+        
+		if not s:
+			return False
+		
+		if s == '' or len(s)==1:
+			return True
+				
+		start = 0
+		end = len(s) - 1
+		
+		s_list = list(s)
+		
+		while start<=end:
+			if not s_list[start].isalnum():
+				start+=1
+				continue
+			if not s_list[end].isalnum():
+				end-=1
+				continue
+			#print(s_list[start], s_list[end])	
+			if s_list[start].upper() != s_list[end].upper():
+				return False 
+			start+=1
+			end-=1			
+			
+		return True	
+def main():
+
+	sol = Solution()
+	
+	s = "A man, a plan, a canal: Panama"
+	s = "race a car"
+	result = sol.isPalindrome(s)
+	
+	print(result)	
+	
+if __name__=="__main__":main()

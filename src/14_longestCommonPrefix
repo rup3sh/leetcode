@@ -1,0 +1,50 @@
+#!/bin/python3
+
+#Write a function to find the longest common prefix string amongst an array of strings. 
+import collections
+
+class Solution2(object):
+
+	def longestCommonPrefix(self, strs):
+		"""
+		:type strs: List[str]
+		:rtype: str
+		"""
+		if not strs:
+			return ''
+			
+		cursor = 0
+		common = []
+		no_match = None
+		
+		is_searching = True
+		#It doesn't matter its smallest or not
+		for cursor in range(0, len(strs[0])):
+			c = strs[0][cursor]
+			common.append(c) ## Add eagerly
+			for st in strs[1:]:
+				if len(st)-1<cursor or st[cursor] != c:
+					is_searching = False
+					no_match = True
+					
+			if not is_searching:
+				break
+			
+		if no_match: #If unmatched char was added, take it out							
+			return ''.join(common[:-1])
+		else: #This means first string was the shortest
+			return ''.join(common)				
+
+def main():
+
+	sol = Solution()
+	
+	a = ['leetcode', 'leets' 'leetler', 'leelux', 'leet']
+	#a = ['le', 'leetcode', 'leets' 'leetler', 'leelux', 'leet']
+	a = ['aa', 'a']
+
+	result = sol.longestCommonPrefix(a)
+
+	print(result)
+
+if __name__=="__main__":main()

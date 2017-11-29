@@ -1,0 +1,35 @@
+#!/bin/python3
+
+# Given a string s consists of upper/lower-case alphabets and empty space characters ' ',
+# return the length of last word in the string.
+class Solution(object):
+	def lengthOfLastWord(self, s):
+		"""
+		:type s: str
+		:rtype: int
+		"""
+		count=0
+		word_once = False
+
+		for i in reversed(range (0, len(s))):
+			if s[i]!=' ':
+				count+=1
+				word_once = True
+			elif word_once:
+				break
+
+		return count				
+		
+	
+
+def main():
+
+	sol = Solution()
+	
+	a = "World is Round! "
+	b = "b   a    "
+	result = sol.lengthOfLastWord(b)
+
+	print(result)
+
+if __name__=="__main__":main()

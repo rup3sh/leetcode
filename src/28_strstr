@@ -1,0 +1,33 @@
+#!/bin/python3
+
+#28. Implement strStr()  
+# or -1 if needle is not part of haystack.
+class Solution(object):
+	def strStr(self, haystack, needle):
+		index = -1
+		if haystack == needle:
+			return 0
+			
+		hay = list(haystack)
+		ned = list(needle)
+		
+		ned_len = len(needle)
+		
+		for i in range(0, len(hay)-ned_len+1):
+		
+			#print(hay[i:i+ned_len])
+			if hay[i:i+ned_len] == ned:
+				return i
+		
+		
+		return index
+def main():
+
+	sol = Solution()
+	haystack = 'mississippi'
+	needle = 'pi'
+	
+	val = sol.strStr(haystack,needle)
+	print("Result", val)
+	
+if __name__=="__main__":main()

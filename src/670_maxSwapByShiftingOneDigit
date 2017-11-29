@@ -1,0 +1,51 @@
+#!/bin/python3
+
+#670 Given a non-negative integer, you could swap two digits at most
+# once to get the maximum valued number. 
+# Return the maximum valued number you could get. 
+# O(N) solution it seems. Had to look it up in discussions
+
+class Solution(object):
+
+	def maximumSwap(self, num):
+	
+		nums = []
+		
+		while num:
+			m = num%10			
+			nums.append(m)
+			num = num//10
+		
+		nums = list(reversed(nums))	
+		
+		last_occr = {n:i for i,n in enumerate(nums)}
+		
+		print(last_occr)
+		
+		for i, n in enumerate(nums):
+			#print ("n:", n, "i:", i)
+			is_swapped=False
+			for d in range(9, n, -1):
+				if d in last_occr and last_occr[d] > i:
+					#print ("d:", d,"last::",last_occr[d]) 
+					nums[i], nums[last_occr[d]] = nums[last_occr[d]], nums[i]
+					is_swapped = True
+					break
+			if is_swapped:
+				break		
+					
+		return int(''.join(map(str, nums)))	
+				
+					
+def main():
+
+	sol = Solution()
+	#num2 = 2736	
+	#num2 = 9291
+	#num2 = 9973
+	num2 = 98368
+	print("Number:", num2)
+	val = sol.maximumSwap(num2)
+	print("swapped", val)
+	
+if __name__=="__main__":main()

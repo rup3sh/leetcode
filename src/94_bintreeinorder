@@ -1,0 +1,47 @@
+#!/bin/python3
+
+#94. Binary Tree Inorder Traversal without recursion
+
+class TreeNode:
+
+	def __init__(self, val, left=None, right=None):
+		self.val = val
+		self.left = left
+		self.right = right
+
+class Solution(object):
+	def inorderTraversal(self, root):
+		"""
+		:type root: TreeNode
+		:rtype: List[int]
+		"""
+		
+		result = []
+		stack = []
+		
+		while stack or root:
+		
+			if root:
+				stack.append(root)
+				root = root.left
+			else:
+				n = stack.pop()
+				result.append(n.val)
+				root = n.right
+		return result		
+					
+def main():
+
+	sol = Solution()
+	l7 = TreeNode(7)
+	l15 = TreeNode(15)
+	
+	l9 = TreeNode(9)
+	l20 = TreeNode(20, l15,l7)
+	
+	l3 = TreeNode(3, l9,l20)
+	
+	val = sol.inorderTraversal(l3)
+	print("Result", val)
+	
+if __name__=="__main__":main()

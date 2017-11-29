@@ -1,0 +1,48 @@
+#!/bin/python3
+
+import collections
+#Leetcode 637, Average of Levels in Binary Tree 
+class Solution(object):
+	def averageOfLevels(self, root):
+		"""
+		:type root: TreeNode
+		:rtype: List[float]
+		"""
+		info = dict()# Depth is array index, Summation
+		
+		def dfs(node, depth=0):
+			if node:
+				if depth not in info:			
+					info[depth] = list()
+				
+				info[depth].append(node.val)
+				dfs(node.left, depth+1)
+				dfs(node.right, depth+1)		
+		
+		dfs(root)			
+		#print(info)	
+		
+		return [sum(info[i])/float(len(info[i])) for i in range(0, len(info))]
+		
+		
+class TreeNode:
+
+	def __init__(self, val, left=None, right=None):
+		self.val = val
+		self.left = left
+		self.right = right					
+def main():
+
+	l7 = TreeNode(7)
+	l15 = TreeNode(15)
+	
+	l9 = TreeNode(9)
+	l20 = TreeNode(20, l15,l7)
+	
+	l3 = TreeNode(3, l9,l20)
+	
+	sol = Solution()
+	levels = sol.averageOfLevels(l3)
+	print(levels)
+	
+if __name__=="__main__":main()

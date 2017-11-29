@@ -1,0 +1,50 @@
+#!/bin/python3
+
+import collections
+#Leetcode 111. Minimum Depth of Binary Tree 
+#The minimum depth is the number of nodes along the shortest path 
+#from the root node down to the nearest leaf node.
+class Solution(object):
+
+	def minDepth(self, root):
+	
+		if not root:
+			return 0
+		
+		depth = 0
+		
+		if root.left and root.right:
+			depth += 1 + min(self.minDepth(root.left), self.minDepth(root.right))
+		elif root.left:
+			depth += 1 + self.minDepth(root.left)
+		elif root.right:
+			depth += 1 + self.minDepth(root.right)		
+		else:
+			depth+=1
+			
+		return depth
+		
+class TreeNode:
+
+	def __init__(self, val, left=None, right=None):
+		self.val = val
+		self.left = left
+		self.right = right					
+def main():
+
+	
+	l7 = TreeNode(7, TreeNode(10), TreeNode(11))
+	l15 = TreeNode(15, TreeNode(2), TreeNode(20))	
+	#l7 = TreeNode(7)
+	#l15 = TreeNode(15)	
+	l9 = TreeNode(9)
+	l20 = TreeNode(20, l15,l7)	
+	l3 = TreeNode(3, l9,l20)
+	
+	
+	#l3 = TreeNode(2, TreeNode(1))
+	sol = Solution()
+	depth = sol.minDepth(l3)
+	print("minDepth", depth)
+	
+if __name__=="__main__":main()

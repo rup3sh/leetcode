@@ -1,0 +1,55 @@
+#!/bin/python3
+
+from collections import deque
+
+class Solution(object):
+	def reverse(self, num):
+		"""
+		:type num: int]
+		:rtype: int
+		"""
+		is_neg = False
+		if num<0:
+			is_neg=True
+			num = -1 * num
+
+		if num > 2**31: #32-bit signed max
+			return 0
+
+		i = 0
+		result = deque()
+		while num>0:
+
+			rem = num%10
+			num = num//10			
+			result.append(rem)
+		
+		print("R ", result)
+		acc=0
+		while result:
+				p = result.popleft()
+				print("P :", p)
+
+				acc += p * pow(10,len(result))
+		
+		if acc > 2**31: #32-bit signed max
+			return 0
+			
+		if is_neg:
+			return -1*acc 
+		else:
+			return acc
+
+def main():
+
+	print ("reverse number")
+	sol = Solution()
+	
+	a = -123
+	a = 1534236469
+
+	result = sol.reverse(a)
+
+	print(result)
+
+if __name__=="__main__":main()

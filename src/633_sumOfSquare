@@ -1,0 +1,36 @@
+#!/bin/python3
+
+import math
+	
+class Solution(object):
+	def judgeSquareSum(self, c):
+		"""
+		:type c: int
+		:rtype: bool
+		"""
+		
+		if c == 0:
+			return True
+		##The range is 0 to sqrt of c
+		for a in range(0, int(math.ceil((math.sqrt(c))))):
+			b = math.sqrt(c - a*a)
+
+			if int(b) == b: # Find if its integer(whole number)
+				print (a, b)
+				return True 
+
+		return False
+		
+
+def main():
+
+	print ("remove duplicates")
+	sol = Solution()
+	
+	c =4
+
+	result = sol.judgeSquareSum(c)
+
+	print(result)
+
+if __name__=="__main__":main()
